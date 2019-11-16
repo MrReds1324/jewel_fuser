@@ -1,11 +1,10 @@
-import sys
-import getopt
+import argparse
 import random
 
 
 def _fuse_five_SSS():
     success_chance = {'A': 10, 'S': 5, 'SS': 1}
-    lucky_chance = {'A': 3, 'S': 5, 'SS': 10}
+    lucky_chance = {'A': 3, 'S': 5, 'SS': 10, 'DEF': 0}
     jewels_used_A = 0
     jewels_used_S = 0
     jewels_used_SS = 0
@@ -47,23 +46,27 @@ def _fuse_jewel(success, bonus):
 
 
 def main():
-    unixOptions = "ho:v"
-    gnuOptions = ["help", "output=", "verbose"]
+    # initiate the parser
+    parser = argparse.ArgumentParser(description='This program runs Monte Carlo simulation on fusing jewels and generates a csv file of the results to this directory, or the specified directory')
+    parser.add_argument("-V", "--version", help="show program version", action="store_true")
+    parser.add_argument("-o", "--output", type=str, help="output directory")
+    parser.add_argument("-l", "--lucky", type=str, help="lucky jewel to use [A, S, SS]")
+    parser.add_argument("num_simulations", type=int, help="number of simulations to run fusing five SSS jewels")
 
-    fullCmdArguments = sys.argv
+    # read arguments from the command line
+    args = parser.parse_args()
 
-    # - further arguments
-    argumentList = fullCmdArguments[1:]
+    # check for --version or -V
+    if args.version:
+        print("Version 1.0")
+    if args.output:
+        print(args.output)
+    if args.lucky:
+        print(args.lucky)
+    else:
+        test = 'DEF'
 
-    try:
-        arguments, values = getopt.getopt(argumentList, unixOptions, gnuOptions)
-    except getopt.error as err:
-        # output error, and return with an error code
-        print (str(err))
-        sys.exit(2)
-
-    num_runs = 1
-    for i in range(num_runs):
+    for i in range(args.num_simulations):
         _fuse_five_SSS()
 
 
