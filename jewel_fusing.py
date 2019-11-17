@@ -2,6 +2,7 @@ import argparse
 import random
 import os
 
+
 def _fuse_five_SSS(lucky, out_file):
     success_chance = {'A': 10, 'S': 5, 'SS': 1}
     lucky_chance = {'A': 3, 'S': 5, 'SS': 10, 'DEF': 0}
@@ -34,7 +35,6 @@ def _fuse_five_SSS(lucky, out_file):
     out_file.write(str(jewels_used_SS) + '\n')
 
 
-
 def _fuse_jewel(success, bonus):
     rand = random.random() * 100
     # return number of jewels used, and number of jewels fused
@@ -46,7 +46,8 @@ def _fuse_jewel(success, bonus):
 
 def main():
     # initiate the parser
-    parser = argparse.ArgumentParser(description='This program runs Monte Carlo simulation on fusing jewels and generates a csv file of the results to this directory, or the specified directory')
+    parser = argparse.ArgumentParser(
+        description='This program runs Monte Carlo simulation on fusing jewels and generates a csv file of the results to this directory, or the specified directory')
     parser.add_argument("-o", "--output", type=str, help="output directory")
     parser.add_argument("-l", "--lucky", type=str, help="lucky jewel to use [A, S, SS]")
     parser.add_argument("file_name", type=str, help="name of the file to output to")
@@ -73,6 +74,8 @@ def main():
     with open(full_file, 'w+') as out_file:
         out_file.write('A jewels, S jewels, SS jewels\n')
         for i in range(args.num_simulations):
+            if ((i + 1) % 5000) == 0:
+                print(i)
             _fuse_five_SSS(lucky_jewel, out_file)
     exit()
 
