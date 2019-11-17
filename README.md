@@ -6,7 +6,8 @@ Download or clone the repository to a directory of your choice
 
 Navigate to the directory where the script is and run the script by calling ```python jewel_fusing.py <FILE NAME> <NUM OF SIMULATIONS>```
 
-###Command line arguments
+**Command line arguments**
+
 Optional arguments:
 - -h shows the help
 - -o output directory for the files, default will output the files to the same directory you call the script from
@@ -16,5 +17,6 @@ Required arguments:
 - file name
 - number of simulations
 
-###Example Run
+**Example Run**
+
 ```python jewel_fusing.py -o E:\ouput -l SS lucky_fuse 1000```
