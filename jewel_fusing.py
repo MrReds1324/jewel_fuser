@@ -74,7 +74,7 @@ def main():
     with open(full_file, 'w+') as out_file:
         out_file.write('A jewels, S jewels, SS jewels\n')
         for i in range(args.num_simulations):
-            if ((i + 1) % 5000) == 0:
+            if ((i + 1) % 2500) == 0:
                 print(i)
             _fuse_five_SSS(lucky_jewel, out_file)
     exit()
