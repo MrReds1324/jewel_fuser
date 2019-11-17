@@ -1,5 +1,5 @@
 # jewel_fuser
-Command line script written in python to run simulations for fusing 5 SSS jewels
+Command line script written in python to run simulations for fusing 5 SSS jewels and outputs the results to a csv file
 - Requires Python 3.2 or higher 
 
 Download or clone the repository to a directory of your choice
