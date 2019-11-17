@@ -38,7 +38,7 @@ def _fuse_five_SSS(lucky, out_file):
 def _fuse_jewel(success, bonus):
     rand = random.random() * 100
     # return number of jewels used, and number of jewels fused
-    if rand <= (success + bonus):
+    if rand < (success + bonus):
         return 3, 1
     else:
         return 2, 0
