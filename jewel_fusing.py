@@ -2,7 +2,7 @@ import argparse
 import random
 
 
-def _fuse_five_SSS():
+def _fuse_five_SSS(lucky):
     success_chance = {'A': 10, 'S': 5, 'SS': 1}
     lucky_chance = {'A': 3, 'S': 5, 'SS': 10, 'DEF': 0}
     jewels_used_A = 0
@@ -15,17 +15,17 @@ def _fuse_five_SSS():
 
     while current_jewels_SSS < 5:
         if current_jewels_SS >= 3:
-            used_jewels, new_jewel = _fuse_jewel(success_chance.get('SS'), 10)
+            used_jewels, new_jewel = _fuse_jewel(success_chance.get('SS'), lucky_chance.get(lucky))
             current_jewels_SS -= used_jewels
             jewels_used_SS += used_jewels
             current_jewels_SSS += new_jewel
         elif current_jewels_S >= 3:
-            used_jewels, new_jewel = _fuse_jewel(success_chance.get('S'), 10)
+            used_jewels, new_jewel = _fuse_jewel(success_chance.get('S'), lucky_chance.get(lucky))
             current_jewels_S -= used_jewels
             jewels_used_S += used_jewels
             current_jewels_SS += new_jewel
         else:
-            used_jewels, new_jewel = _fuse_jewel(success_chance.get('A'), 10)
+            used_jewels, new_jewel = _fuse_jewel(success_chance.get('A'), lucky_chance.get(lucky))
             jewels_used_A += used_jewels
             current_jewels_S += new_jewel
 
@@ -60,14 +60,16 @@ def main():
     if args.version:
         print("Version 1.0")
     if args.output:
-        print(args.output)
+        print('Outputting file to: ' + args.output)
     if args.lucky:
-        print(args.lucky)
+        if args.lucky not in ['A', 'S', 'SS']:
+            exit('Incorrect Lucky Jewel: ' + args.lucky + ' - Expected A, S, or SS')
+        lucky_jewel = args.lucky
     else:
-        test = 'DEF'
+        lucky_jewel = 'DEF'
 
     for i in range(args.num_simulations):
-        _fuse_five_SSS()
+        _fuse_five_SSS(lucky_jewel)
 
 
 if __name__ == "__main__":
